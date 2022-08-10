@@ -10,7 +10,8 @@
     phx-submit="save">
   
     <%= label f, :body %>
-    <%= textarea f, :body %>
+    <%= textarea f, :body, class: "border rounded" %>
+
     <%= error_tag f, :body %>
 
     <div>
