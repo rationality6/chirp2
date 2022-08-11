@@ -1,3 +1,7 @@
+
+<img width="622" alt="Screen Shot 2022-08-12 at 1 15 22 AM" src="https://user-images.githubusercontent.com/3889468/184180600-0e8c58c3-6f14-4fc8-b4ce-0975234c568c.png">
+
+
 # Chirp
 
 To start your Phoenix server:
