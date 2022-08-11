@@ -5,6 +5,7 @@ defmodule Chirp.Timeline.Post do
   schema "posts" do
     field :body, :string
     field :likes_count, :integer, default: 0
+    field :dislikes_count, :integer, default: 0
     field :reposts_count, :integer, default: 0
     field :username, :string, default: "hyun_ahn"
 

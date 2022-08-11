@@ -51,6 +51,12 @@ defmodule ChirpWeb.PostLive.Index do
     {:noreply, update(socket, :posts, fn posts -> [post | posts] end)}
   end
 
+  @impl true
+  def handle_info({:post_deleted, post}, socket) do
+    socket = update(socket, :posts, fn posts -> Enum.reject(posts, fn p -> p.id == post.id end) end)
+    {:noreply, socket}
+  end
+
   defp list_posts do
     Timeline.list_posts()
   end

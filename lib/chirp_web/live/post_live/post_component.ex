@@ -14,19 +14,28 @@ defmodule ChirpWeb.PostLive.PostComponent do
       </div>
 
       <div class="flex justify-between mx-6">
-        <div class="column post-button-column">
+        <a href="#" phx-click="like" phx-target={@myself}>
           <i class="far fa-heart"></i> <%= @post.likes_count %>
-        </div>
+        </a>
+
+        <a href="#" phx-click="dislike" phx-target={@myself}>
+          <i class="fa-solid fa-heart-crack"></i> <%= @post.dislikes_count %>
+        </a>
+
+        <a href="#" phx-click="repost" phx-target={@myself}>
+        <i class="far fa-hand-peace"></i> <%= @post.reposts_count %>
+        </a>
+
         <div class="column post-button-column">
-          <i class="far fa-hand-peace"></i> <%= @post.reposts_count %>
-        </div>
-        <div class="column post-button-column">
+
           <%= live_patch to: Routes.post_index_path(@socket, :edit, @post.id) do %>
             <i class="far fa-edit"></i>
           <% end %>
-          <%= link to: "#", phx_click: "delete", phx_value_id: @post.id do %>
+
+          <a href="#" phx-click="delete_post" phx-target={@myself}>
             <i class="far fa-trash-alt"></i>
-          <% end %>
+          </a>
+
         </div>
       </div>
     </div>
@@ -38,8 +47,18 @@ defmodule ChirpWeb.PostLive.PostComponent do
     {:noreply, socket}
   end
 
+  def handle_event("dislike", _, socket) do
+    Chirp.Timeline.inc_dislikes(socket.assigns.post)
+    {:noreply, socket}
+  end
+
   def handle_event("repost", _, socket) do
     Chirp.Timeline.inc_reposts(socket.assigns.post)
+    {:noreply, socket}
+  end
+
+  def handle_event("delete_post", _, socket) do
+    Chirp.Timeline.delete_post(socket.assigns.post)
     {:noreply, socket}
   end
 end
