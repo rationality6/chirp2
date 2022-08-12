@@ -89,6 +89,8 @@ defmodule Chirp.Timeline do
   """
   def delete_post(%Post{} = post) do
     Repo.delete(post)
+
+    Repo.all(from p in Post, order_by: [desc: p.id])
     |> broadcast(:post_deleted)
   end
 
